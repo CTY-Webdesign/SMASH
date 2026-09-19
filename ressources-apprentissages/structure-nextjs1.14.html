@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Structure Next.js - Fiche Récap</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #333;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      overflow: hidden;
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+    
+    .header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    
+    .header p {
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+    
+    .content {
+      padding: 30px;
+    }
+    
+    .section {
+      margin-bottom: 30px;
+    }
+    
+    .section-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid #667eea;
+    }
+    
+    .folder-item {
+      background: #f8f9fa;
+      border-left: 4px solid #667eea;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    
+    .folder-item:hover {
+      background: #e8eaf6;
+      transform: translateX(5px);
+    }
+    
+    .folder-name {
+      font-weight: bold;
+      color: #667eea;
+      font-size: 1.1em;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .folder-icon {
+      font-size: 1.3em;
+    }
+    
+    .folder-desc {
+      color: #666;
+      font-size: 0.95em;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    
+    .folder-content {
+      background: white;
+      padding: 10px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: #555;
+      font-family: 'Courier New', monospace;
+      border: 1px solid #e0e0e0;
+      margin-top: 8px;
+    }
+    
+    .important {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 6px;
+    }
+    
+    .important strong {
+      color: #856404;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .key-file {
+      background: #e3f2fd;
+      border-left: 4px solid #2196f3;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+    
+    .key-file strong {
+      color: #1976d2;
+    }
+    
+    code {
+      background: #f0f0f0;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>📁 Structure Next.js 14</h1>
+      <p>Fiche Récapitulative : Dossiers & Fichiers</p>
+    </div>
+    
+    <div class="content">
+      
+      <!-- SECTION 1 : DOSSIERS PRINCIPAUX -->
+      <div class="section">
+        <div class="section-title">🎯 Dossiers Principaux</div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>app/</div>
+          <div class="folder-desc"><strong>Cœur de l'application</strong> — Toutes les pages et API routes vivent ici.</div>
+          <div class="folder-content">
+            Contient les pages, layouts, components, API routes<br>
+            Structure = structure URLs (app/tournaments/ → /tournaments)
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>public/</div>
+          <div class="folder-desc"><strong>Fichiers statiques</strong> — Images, icônes, fichiers téléchargeables.</div>
+          <div class="folder-content">
+            ✓ favicon.ico (icône dans l'onglet du browser)<br>
+            ✓ Images, SVG, autres assets publics
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>node_modules/</div>
+          <div class="folder-desc"><strong>Dépendances NPM</strong> — Librairies téléchargées automatiquement.</div>
+          <div class="folder-content">
+            ⚠️ NE PAS TOUCHER !<br>
+            Géré par package.json + package-lock.json<br>
+            ~500MB, souvent ignoré dans Git
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- SECTION 2 : SOUS-DOSSIERS DE app/ -->
+      <div class="section">
+        <div class="section-title">🔍 Dans app/ — Structure Importante</div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📄</span>layout.tsx</div>
+          <div class="folder-desc">Le "template HTML" de ta page — header, footer partagés à tous.</div>
+          <div class="folder-content">
+            Défini une fois, utilisé pour TOUTES les pages<br>
+            Idéal pour navbar, navigation globale
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📄</span>page.tsx</div>
+          <div class="folder-desc">Une page affichable dans le browser (la vraie page web).</div>
+          <div class="folder-content">
+            app/page.tsx → / (homepage)<br>
+            app/tournaments/page.tsx → /tournaments<br>
+            app/tournaments/new/page.tsx → /tournaments/new
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>api/</div>
+          <div class="folder-desc">Tes API routes (endpoints backend) — reçoivent requêtes HTTP.</div>
+          <div class="folder-content">
+            app/api/tournaments/route.ts → POST/GET /api/tournaments<br>
+            app/api/matches/[id]/route.ts → PATCH /api/matches/123
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- SECTION 3 : FICHIERS DE CONFIGURATION -->
+      <div class="section">
+        <div class="section-title">⚙️ Fichiers de Configuration (Racine du Projet)</div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📋</span>package.json</div>
+          <div class="folder-desc">Le "manuel" du projet — dépendances, scripts, info projet.</div>
+          <div class="folder-content">
+            ✓ npm install ← lit package.json<br>
+            ✓ npm run dev ← exécute le script "dev"<br>
+            ✓ Liste toutes tes librairies (React, Next.js, Tailwind, etc.)
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">🔒</span>package-lock.json</div>
+          <div class="folder-desc"><strong>NE PAS ÉDITER</strong> — Verrouille les versions des dépendances.</div>
+          <div class="folder-content">
+            Généré automatiquement par npm<br>
+            Garantit que tout le monde a les mêmes versions
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">🎨</span>tsconfig.json</div>
+          <div class="folder-desc">Configuration TypeScript — comment le code est vérifié.</div>
+          <div class="folder-content">
+            Défini les règles de typage TypeScript<br>
+            Ne pas toucher sauf connaissance avancée
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">🎨</span>tailwind.config.ts</div>
+          <div class="folder-desc">Configuration Tailwind CSS — couleurs, fonts, thème custom.</div>
+          <div class="folder-content">
+            Ajoute tes couleurs custom, breakpoints, fonts ici<br>
+            Actuellement : configuration par défaut (ok pour démarrer)
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">⚙️</span>next.config.ts</div>
+          <div class="folder-desc">Configuration Next.js — images, redirects, variables env, etc.</div>
+          <div class="folder-content">
+            Actuellement : configuration par défaut (ok pour démarrer)
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">🚫</span>.gitignore</div>
+          <div class="folder-desc">Dit à Git quoi ignorer — node_modules, .env, build files, etc.</div>
+          <div class="folder-content">
+            ✓ node_modules/ (trop gros, pas besoin)<br>
+            ✓ .next/ (fichiers de build)<br>
+            ✓ .env.local (secrets, API keys)
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📄</span>.env.local</div>
+          <div class="folder-desc"><strong>SECRET</strong> — Variables d'environnement locales (pas en Git).</div>
+          <div class="folder-content">
+            ✓ DATABASE_URL="postgresql://..."<br>
+            ✓ API_KEYS, tokens, secrets<br>
+            ⚠️ Toujours dans .gitignore !
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- SECTION 4 : AUTRES DOSSIERS FUTURS -->
+      <div class="section">
+        <div class="section-title">🔮 Dossiers Que Tu Vas Créer (Phase 3+)</div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>lib/</div>
+          <div class="folder-desc">Fonctions utilitaires — DB, validation, calculs.</div>
+          <div class="folder-content">
+            lib/db.ts ← connexion base de données<br>
+            lib/schema.ts ← définition des tables<br>
+            lib/validation.ts ← schémas Zod
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>components/</div>
+          <div class="folder-desc">Composants React réutilisables — boutons, cards, forms, etc.</div>
+          <div class="folder-content">
+            components/TournamentBracket.tsx<br>
+            components/MatchCard.tsx<br>
+            components/PlayerInput.tsx
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>hooks/</div>
+          <div class="folder-desc">Hooks React custom — logique réutilisable.</div>
+          <div class="folder-content">
+            hooks/useTournament.ts<br>
+            hooks/useMatches.ts<br>
+            hooks/useRanking.ts
+          </div>
+        </div>
+        
+        <div class="folder-item">
+          <div class="folder-name"><span class="folder-icon">📂</span>drizzle/</div>
+          <div class="folder-desc">Migrations base de données — historique des changements DB.</div>
+          <div class="folder-content">
+            Créé automatiquement par Drizzle<br>
+            drizzle/0001_initial_schema.sql<br>
+            drizzle/0002_add_column_xyz.sql
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- SECTION 5 : RÉSUMÉ VISUEL -->
+      <div class="section">
+        <div class="section-title">📊 Résumé : Où Mettre Quoi ?</div>
+        
+        <div class="grid">
+          <div class="key-file">
+            <strong>🎨 Une page Web ?</strong><br>
+            → <code>app/dossier/page.tsx</code>
+          </div>
+          <div class="key-file">
+            <strong>⚙️ Une API endpoint ?</strong><br>
+            → <code>app/api/route.ts</code>
+          </div>
+          <div class="key-file">
+            <strong>🧩 Un composant réutilisable ?</strong><br>
+            → <code>components/NomComposant.tsx</code>
+          </div>
+          <div class="key-file">
+            <strong>🔧 Une fonction utile ?</strong><br>
+            → <code>lib/fichierUtile.ts</code>
+          </div>
+          <div class="key-file">
+            <strong>🪝 Une logique React ?</strong><br>
+            → <code>hooks/useNomHook.ts</code>
+          </div>
+          <div class="key-file">
+            <strong>🖼️ Une image/icône ?</strong><br>
+            → <code>public/image.png</code>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SECTION 6 : À RETENIR -->
+      <div class="important">
+        <strong>🎯 L'ESSENTIEL À RETENIR :</strong><br><br>
+        ✅ <code>app/</code> = tout ce qui est visible (pages + API)<br>
+        ✅ <code>package.json</code> = recette du projet<br>
+        ✅ <code>node_modules/</code> = librairies téléchargées (ne pas toucher)<br>
+        ✅ <code>.env.local</code> = secrets (ne pas committer en Git)<br>
+        ✅ Structure des dossiers = structure des URLs
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>
